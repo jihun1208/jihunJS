@@ -30,4 +30,4 @@ class Newbmw extends Bmw{
 
 const mybmw = new Newbmw("white");
 
-sexybmw.stop();
+mybmw.stop();
