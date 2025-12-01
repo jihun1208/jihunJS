@@ -1,10 +1,31 @@
-const pr = new Promise((resolve, reject) => {setTimeout(() => {
-    reject(new Error("err....."));
-}, 1000);
-});
+const f1 = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve("1번 주문 완료");
+        }, 1000);
+    });
+}
 
-console.log("시작");
+const f2 = (message) => {
+    console.log(message);
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve("2번 주문 완료");
+        }, 3000);
+    });
+}
 
-pr.then((result)=>{console.log(result);})
-.catch((err) => {console.log(err);})
-.finally(()=>{console.log("끝");});
+const f3 = (message) => {
+    console.log(message);
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve("3번 주문 완료");
+        }, 2000);
+    });
+}
+
+f1().then((result) => f2(result))
+.then((result) => f3(result))
+.then((result) => console.log(result))
+.catch()
+.finally(() => {console.log("끝");});
