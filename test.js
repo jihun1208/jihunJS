@@ -1,33 +1,10 @@
-class Car{
-    constructor(color){
-        this.color = color;
-        this.wheels = 4;
-    }
-    drive(){
-        console.log("drive..");
-    }
-    stop(){
-        console.log("STOP!");
-    }
-}
+const pr = new Promise((resolve, reject) => {setTimeout(() => {
+    reject(new Error("err....."));
+}, 1000);
+});
 
-class Bmw extends Car{
-    park(){
-        console.log("PARK");
-    }
-    stop(){
-        super.stop();
-        console.log("and.. wait!");
-    }
-}
+console.log("시작");
 
-class Newbmw extends Bmw{
-    stop(){
-        super.stop();
-        console.log("yre!!");
-    }
-}
-
-const mybmw = new Newbmw("white");
-
-mybmw.stop();
+pr.then((result)=>{console.log(result);})
+.catch((err) => {console.log(err);})
+.finally(()=>{console.log("끝");});
