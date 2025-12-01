@@ -24,8 +24,18 @@ const f3 = (message) => {
     });
 }
 
-f1().then((result) => f2(result))
-.then((result) => f3(result))
-.then((result) => console.log(result))
-.catch()
-.finally(() => {console.log("끝");});
+async function order(){
+    const result1 = await f1();
+    const result2 = await f2(result1);
+    const result3 = await f3(result2);
+    console.log(result3);
+    console.log("끝");
+}
+
+order();
+
+// f1().then((result) => f2(result))
+// .then((result) => f3(result))
+// .then((result) => console.log(result))
+// .catch()
+// .finally(() => {console.log("끝");});
