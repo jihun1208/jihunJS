@@ -1,7 +1,11 @@
-.alert-box{
-    background-color: rgb(116, 116, 185);
-    color: blue;
-    padding: 20px;
-    border-radius: 5px;
+#idErrorBox{
+    color:blue;
+    background-color: skyblue;
     display: none;
-}   
+}
+
+#passwordErrorBox{
+    color:blue;
+    background-color: skyblue;
+    display: none;
+}

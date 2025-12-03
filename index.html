@@ -6,9 +6,15 @@
         <link rel = "stylesheet" href = "main.css">
     </head>
     <body>
-
-        <input id = "ip"> <button onclick = "inputting()">입력</button>
-        <p id = "op">출력</p>
+        <input id = "id" placeholder="아이디를 입력하세요.">
+        <br>
+        <input id = "pw" placeholder="비밀번호를 입력하세요.">
+        <br>
+        <button onclick="entering()">입력</button>
+        <div class = "alertBox" id = "idErrorBox"><p>아이디를 입력하지 않았습니다!</p></div>
+        <div class = "alertBox" id = "passwordErrorBox"><p>비밀번호를 입력하지 않았습니다!</p></div>
+        <p id = "first">[아이디]</p>
+        <p id = "second">[비밀번호]</p>
 
         <script src = "/test.js"></script>
     </body>
