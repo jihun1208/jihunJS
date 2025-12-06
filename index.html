@@ -29,7 +29,6 @@
         z-index:1;
         width:100%;
         padding:1rem;
-        background-color: black;
     }
     header .container{
         display: flex;
@@ -410,7 +409,18 @@
             font-size:3rem;
         }
     }
-    
+    header.active{
+        background-color: rgba(0,0,0);
+        animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 1;
+        }
+    }    
     
 </style>
 </head>
@@ -419,21 +429,21 @@
     <header>
         <div class = "container">
             <h1>
-                <button>J</button>
+                <button data-animation-scroll="true" data-target="main">J</button>
             </h1>
             <nav>
                 <ul>
                     <li>
-                        <button onclick = "intoAbout()">About</button>
+                        <button data-animation-scroll="true" data-target="#about">About</button>
                     </li>
                     <li>
-                        <button>Features</button>
+                        <button data-animation-scroll="true" data-target="#features">Features</button>
                     </li>
                     <li>
-                        <button>Portfolio</button>
+                        <button data-animation-scroll="true" data-target="#portfolio">Portfolio</button>
                     </li>
                     <li>
-                        <button>Contact</button>
+                        <button data-animation-scroll="true" data-target="#contact">Contact</button>
                     </li>
                 </ul>
             </nav>
@@ -444,7 +454,7 @@
     <main>
         <div class = "container">
             <h4>Welcome to my Web</h4>
-            <h2>I'M A <span>Front-End Developer</span></h2>
+            <h2>I'M A <span></span></h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium 
                 dolor quas nulla unde aea officiis?</p>
             <button class= "download">DOWNLOAD CV</button>
@@ -619,7 +629,7 @@
                             <label for="msg">message</label>
                             <textarea id="msg"></textarea>
                         </div>
-                        <button type="summit">send</button>
+                        <button type="submit">send</button>
                     </form>
                 </div>
             </div>
