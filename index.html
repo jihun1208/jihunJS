@@ -1,21 +1,632 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Document</title>
-        <link rel = "stylesheet" href = "main.css">
-    </head>
-    <body>
-        <input id = "id" placeholder="아이디를 입력하세요.">
-        <br>
-        <input id = "pw" placeholder="비밀번호를 입력하세요.">
-        <br>
-        <button onclick="entering()">입력</button>
-        <div class = "alertBox" id = "idErrorBox"><p>아이디를 입력하지 않았습니다!</p></div>
-        <div class = "alertBox" id = "passwordErrorBox"><p>비밀번호를 입력하지 않았습니다!</p></div>
-        <p id = "first">[아이디]</p>
-        <p id = "second">[비밀번호]</p>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name= "viewport" content="width=device-width, initial-scale=1.0"> 
+    <title> Final Project</title> 
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
+    a, a:link, a:visited{
+        color:inherit;
+        text-decoration:none;
+    }
+    li{
+        list-style:none;
+    }
+    .container{
+        width:1140px;
+        margin:0 auto;
+    }
+    header{
+        position:fixed;
+        color:white;
+        top:0;
+        z-index:1;
+        width:100%;
+        padding:1rem;
+        background-color: black;
+    }
+    header .container{
+        display: flex;
+        justify-content: space-between;
+        align-items:center;
+        width:100%;
+    }
+    header nav ul{
+        display: flex;
+    }
+    header nav ul li{
+        padding:10px;
+    }
+    header button{
+        background-color: transparent;
+        border:0;
+        cursor:pointer;
+    }
+    header h1 button{
+        color:white;
+        font-size:2rem;
+        font-weight: bold;
+    }
+    header nav ul li button{
+        font-size: 1.2rem;
+        color:white;
+    }
 
-        <script src = "/test.js"></script>
-    </body>
+    main{
+        width:100%;
+        height:100vh;
+        color:white;
+        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), center center;
+        background-size:cover;
+        display:flex;
+        justify-content: center;
+        align-items:center;
+        text-align:center;
+    }
+    main h4{
+        font-size:2rem;
+    }
+    main h2{
+        font-size:3.5rem;
+        margin:2rem 0;
+        letter-spacing:3px;
+    }
+    main p{
+        max-width:500px;
+        margin: 0 auto;
+        font-size:1.25rem;
+    }
+    main button.download{
+        background-color: transparent;
+        border:3px solid white;
+        border-radius: 20px;
+        padding:1rem 2rem;
+        margin-top:3rem;
+        color:white;
+        font-weight:bold;
+        cursor:pointer;
+    }
+    main button.mouse{
+        background-color: transparent;
+        border:none;
+        color:white;
+        font-size:2rem;
+        position:absolute;
+        bottom:1rem;
+        left:50%;
+        transform: translateX(-50%);
+        animation:upDown 1s ease-in-out infinite;
+        cursor:pointer;
+    }
+    @keyframes upDown {
+        0%{
+            bottom:1rem;
+        }
+        50%{
+            bottom:1.5rem;
+        }
+        100%{
+            bottom:1rem;
+        }
+    }
+    main h2 span::after{
+        content:"";
+        height:40px;
+        width:3px;
+        background-color: #fff;
+        display: inline-block;
+        animation:blink .7s ease-in-out infinite;
+    }
+    @keyframes blink {
+        0%{
+            opacity:1;
+        }
+        100%{
+            opacity:0;
+        }
+    }
+
+    section{
+        font-family: "Poppins", sans-serif;
+        padding:5rem 0;
+    }
+    section:nth-child(2n){
+        background-color: #f8f8f8;
+    }
+    section .title{
+        margin-bottom:3rem;
+    }
+    section .title h4{
+        font-size:1.35rem;
+        color:#ed4848;
+        position:relative;
+        margin-bottom:1rem;
+    }
+    section .title h2{
+        font-size: 3.5rem;
+    }
+    section .title p{
+        font-size:1.15rem;
+    }
+    section .about-self::after{
+        content:"";
+        clear:both;
+        display:block;
+    }
+    section .about-self .left{
+        width:50%;
+        float:left;
+    }
+    section .about-self .left img{
+        width:100%;
+        display:block;
+        height:200px;
+    }
+    section .about-self .right{
+        width:50%;
+        float:left;
+        padding:0 2rem;
+    }
+    section .about-self .right h3{
+        font-size:2.25rem;
+        margin-bottom:1rem;
+    }
+    section .about-self .right strong{
+        color:#ed4848;
+    }
+    section .about-self .right p{
+        font-size:1.15rem;
+        margin:1rem 0;
+    }
+    section .about-self .right .social{
+        font-size:2.5rem;
+        margin-right:0.2rem;
+    }
+    section .do-me::after{
+        content:"";
+        display: block;
+        clear:both;
+    }
+    section .do-me .do-inner {
+        background-color: #fff;
+        width:30%;
+        padding:2rem;
+        float:left;
+        margin-right:5%;
+        cursor:pointer;
+    }
+    section .do-me .do-inner:last-child{
+        margin-right:0;
+    }
+    section .do-me .do-inner .icon{
+        font-size:2.5rem;
+        color:#ff6a6a;
+    }
+    section .do-me .do-inner .content h3{
+        font-size:2rem;
+        margin:1rem 0;
+    }
+    section .do-me .do-inner .content p{
+        font-size:1.15rem;
+    }
+    section .do-me .do-inner:hover{
+        background-color: lightcoral;
+        color:white;
+    }
+
+    section.portfolio::after{
+        content:"";
+        display: block;
+        clear:both;
+    }
+    section .portfolio-me .portfolio-inner{
+        width:30%;
+        margin-right:5%;
+        padding:1rem 1rem 1.5rem 1rem;
+        float:left;
+        border:1px solid #ccc;
+        margin-bottom:3rem;
+    }
+    section .portfolio-me .portfolio-inner:nth-child(3n){
+        margin-right:0;
+    }
+    section .portfolio-me .portfolio-inner strong{
+        color:#ff6a6a;
+        margin:0.5rem 0;
+        display:block;
+    }
+    section .portfolio-me .portfolio-inner h3{
+        font-size:1.75rem;
+    }
+    section .portfolio-me .portfolio-inner img{
+        width:100%;
+        display:block;
+    }
+    section.contact .contact-me::after{
+        content:"";
+        display:block;
+        clear:both;
+    }
+    section .contact-me .left{
+        width:30%;
+        float:left;
+    }
+    section .contact-me .right{
+        width:65%;
+        float:left;
+        margin-left:5%;
+        margin-bottom:2rem;
+        border:1px solid #ccc;
+        padding:1rem;
+    }
+    section .contact-me .left .card{
+        border:1px solid #ccc;
+        padding:1rem;
+        display: flex;
+        align-items: center;
+        margin-bottom:1.25rem;
+    }
+    section .contact-me .card .icon{
+        margin-right:15px;
+        font-size:2rem;
+    }
+    section .contact-me .right .form-group{
+        margin-bottom:1.25rem;
+    }
+    section .contact-me .right .form-group label{
+        display:block;
+        margin-bottom:0.85rem;
+    }
+    section .contact-me .right .form-group input{
+        padding:0.625rem;
+        width:100%;
+        outline:none;
+        border:1px solid #ccc;
+        border-radius: 10px;
+    }
+    section .contact-me .right .form-group input:focus{
+        border:1px solid #719ECE;
+        box-shadow:0 0 10px #719ECE;
+    }
+    section .contact-me .right .form-group textarea{
+        height:300px;
+        width:100%;
+        resize:none;
+        outline:none;
+        border:1px solid #ccc;
+        border-radius: 10px;
+        padding:0.625rem;
+    }
+    section .contact-me .right .form-group textarea:focus{
+        border:1px solid #719ECE;
+        box-shadow:0 0 10px #719ECE;
+    }
+    section .contact-me .right button{
+        width:100%;
+        background-color:#f78b00;
+        padding:1rem;
+        border:none;
+        cursor: pointer;
+        color:white;
+
+    }
+
+    @media screen and (max-width:1140px){
+        main .container{
+            width:992px;
+        }
+        section .container{
+            width:600px;
+        }
+        section .about-self .left{
+            width:100%;
+            margin-bottom:1.5rem;
+        }
+        section .about-self .right{
+            width:100%;
+            padding:0;
+        }
+        section .do-me .do-inner{
+            width:48%;
+            margin-bottom:1.5rem;
+            margin-right:0;
+        }
+        section .do-me .do-inner:nth-child(2n-1){
+            margin-right:4%
+        }
+        section .portfolio-me .portfolio-inner{
+            width:48%;
+            margin-right:0;
+        }
+        section .portfolio-me .portfolio-inner:nth-child(2n-1){
+            margin-right:4%;
+        }
+        section .contact-me .left{
+            width:100%;
+        }
+        section .contact-me .right{
+            width:100%;
+            margin-left:0;
+        }
+    }
+    @media screen and (max-width:992px){
+        html{
+            font-size:14px;
+        }
+        main .container{
+            width:768px;
+        }
+        section .portfolio-me .portfolio-inner{
+            width:100%;
+        }
+    }
+    @media screen and (max-width:768px){
+        html{
+            font-size:13px;
+        }
+        main .container{
+            width:576px;
+        }
+        section .container{
+            width:400px;
+        }
+        section .do-me .do-inner{
+            width:100%;
+            margin-right:0;
+        }
+    }
+    @media screen and (max-width:576px){
+        html{
+            font-size:12px;
+        }
+        main .container{
+            width:400px;
+        }
+        section .container{
+            width:360px;
+        }
+
+    }
+    @media screen and (max-width:400px){
+        html{
+            font-size:11px;
+        }
+        main .container{
+            width:320px;
+        }
+        section .container{
+            width:320px;
+        }
+        main h4{
+            font-size:1.5rem;
+        }
+        section .title h2{
+            font-size:3rem;
+        }
+    }
+    
+    
+</style>
+</head>
+
+<body>
+    <header>
+        <div class = "container">
+            <h1>
+                <button>J</button>
+            </h1>
+            <nav>
+                <ul>
+                    <li>
+                        <button onclick = "intoAbout()">About</button>
+                    </li>
+                    <li>
+                        <button>Features</button>
+                    </li>
+                    <li>
+                        <button>Portfolio</button>
+                    </li>
+                    <li>
+                        <button>Contact</button>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <main>
+        <div class = "container">
+            <h4>Welcome to my Web</h4>
+            <h2>I'M A <span>Front-End Developer</span></h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium 
+                dolor quas nulla unde aea officiis?</p>
+            <button class= "download">DOWNLOAD CV</button>
+            <button class="mouse"><i>🐭</i></button>
+        </div>
+    </main>
+    <section id = "about" class = "about">
+        <div class="container">
+            <div class="title">
+                <h4>Who Am I</h4>
+                <h2>About Me</h2>
+            </div>
+            <div class="about-self">
+                <div class="left">
+                    <img src="images/me_alone.jpg" alt = "샘플이미지">
+                </div>
+                <div class="right">
+                    <h3>Hello, <strong>I'm Jihun</strong></h3>
+                    <p>I'm Web Front-End Developer.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium 
+                    dolor quas nulla unde aea officiis?</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium 
+                    dolor quas nulla unde aea officiis?</p>
+                    <div class="social">
+                        <a href="#">
+                            ⚽️
+                        </a>
+                        <a href="#">
+                            🏀
+                        </a>
+                        <a href="#">
+                            🏐
+                        </a>
+                        <a href="#">
+                            🎾
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="do">
+        <div class="container">
+            <div class="title">
+                <h4>Features</h4>
+                <h2>What I Do</h2>
+            </div>
+            <div class="do-me">
+                <div class="do-inner">
+                    <div class="icon">
+                        🍏
+                    </div>
+                    <div class="content">
+                        <h3>HTML5</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium 
+                        dolor quas nulla unde aea officiis?</p>
+                    </div>
+                </div>
+                <div class="do-inner">
+                    <div class="icon">
+                        🍎
+                    </div>
+                    <div class="content">
+                        <h3>CSS3</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium 
+                        dolor quas nulla unde aea officiis?</p>
+                    </div>
+                </div>
+
+                <div class="do-inner">
+                    <div class="icon">
+                        🍊
+                    </div>
+                    <div class="content">
+                        <h3>Bootstrap v5.0</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium 
+                        dolor quas nulla unde aea officiis?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="title">
+                <h4>PORTFOLIOBACK</h4>
+                <h2>PortFolio</h2>
+            </div>
+            <div class="portfolio-me">
+                <div class="portfolio-inner">
+                    <img src="images/mock1.png" alt = "샘플이미지">
+                    <strong>BRANDING</strong>
+                    <h3>Package Design</h3>
+                </div>
+                <div class="portfolio-inner">
+                    <img src="images/mock1.png" alt = "샘플이미지">
+                    <strong>DEVELOPMENT</strong>
+                    <h3>Tablet App Dev</h3>
+                </div>
+                <div class="portfolio-inner">
+                    <img src="images/mock1.png" alt = "샘플이미지">
+                    <strong>MARKETING</strong>
+                    <h3>Coka Cola</h3>
+                </div>
+                <div class="portfolio-inner">
+                    <img src="images/mock1.png" alt = "샘플이미지">
+                    <strong>APP</strong>
+                    <h3>FaceBook Clone</h3>
+                </div>
+                <div class="portfolio-inner">
+                    <img src="images/mock1.png" alt = "샘플이미지">
+                    <strong>APP</strong>
+                    <h3>Netflix Clone</h3>
+                </div>
+                <div class="portfolio-inner">
+                    <img src="images/mock1.png" alt = "샘플이미지">
+                    <strong>WEB</strong>
+                    <h3>FirmBee Web</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="title">
+                <h4>CONTACT</h4>
+                <h2>Contact With Me</h2>
+            </div>
+            <div class="contact-me">
+                <div class="left">
+                    <div class="card">
+                        <div class="icon">
+                            📞
+                        </div>
+                        <div class="info-text">
+                            <h3>phone</h3>
+                            <p>010-1234-1234</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="icon">
+                            ✉️
+                        </div>
+                        <div class="info-text">
+                            <h3>email</h3>
+                            <p>seungmindokhak@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="icon">
+                            🏠
+                        </div>
+                        <div class="info-text">
+                            <h3>address</h3>
+                            <p>Geumho-dong, Seoul, Republic of Korea</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <form action="#">
+                        <div class="form-group">
+                            <label for="name">name</label>
+                            <input type="text" id="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">email</label>
+                            <input type="text" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="msg">message</label>
+                            <textarea id="msg"></textarea>
+                        </div>
+                        <button type="summit">send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="script.js"></script>
+    
+</body> 
+
 </html>
