@@ -36,10 +36,12 @@ window.addEventListener('scroll', function(){
 function scrollCheck(){
     let browserScrollY = window.scrollY? window.scrollY : window.pageYOffset //scrollY를 써도 되지만, 사용이 불가할경우 pageYOffset 사용
     if (browserScrollY > 0){
+        headerE1.classList.remove("inactive");
         headerE1.classList.add("active");
     }
     else{
         headerE1.classList.remove("active");
+        headerE1.classList.add("inactive");
     }
 }
 
